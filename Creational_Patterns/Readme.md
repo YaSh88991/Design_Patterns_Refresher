@@ -1,7 +1,6 @@
 # Creational Design Patterns
 
-Creational design patterns deal with object creation mechanisms, optimizing and abstracting the instantiation process in ways that suit varying situations.  
-They help you manage complexity by decoupling your code from concrete class instantiation, supporting flexibility, scalability, and clarity in your software architecture.
+Creational design patterns deal with object creation mechanisms, optimizing and abstracting the instantiation process in ways that suit varying situations. They help you manage complexity by decoupling your code from concrete class instantiation, supporting flexibility, scalability, and clarity in your software architecture.
 
 ---
 
