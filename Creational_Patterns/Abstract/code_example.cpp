@@ -7,63 +7,78 @@
 using namespace std;
 
 // Abstract products
-class MainCourse {
+class MainCourse
+{
 public:
     virtual string name() const = 0;
     virtual ~MainCourse() = default;
 };
 
-class Side {
+class Side
+{
 public:
     virtual string name() const = 0;
     virtual ~Side() = default;
 };
 
-class Drink {
+class Drink
+{
 public:
     virtual string name() const = 0;
     virtual ~Drink() = default;
 };
 
 // Concrete products
-class Paneer : public MainCourse {
+class Paneer : public MainCourse
+{
 public:
     string name() const override { return "Paneer Main Course"; }
 };
-class Chicken : public MainCourse {
+class Chicken : public MainCourse
+{
 public:
     string name() const override { return "Chicken Main Course"; }
 };
-class Salad : public Side {
+class Salad : public Side
+{
 public:
     string name() const override { return "Salad Side"; }
 };
-class Fries : public Side {
+class Fries : public Side
+{
 public:
     string name() const override { return "Fries Side"; }
 };
-class Juice : public Drink {
+class Juice : public Drink
+{
 public:
     string name() const override { return "Juice"; }
 };
-class Soda : public Drink {
+class Soda : public Drink
+{
 public:
     string name() const override { return "Soda"; }
 };
 
-void assembleMeal(const string& mealType) {
+void assembleMeal(const string &mealType)
+{
     unique_ptr<MainCourse> mainC;
     unique_ptr<Side> side;
     unique_ptr<Drink> drink;
-    if (mealType == "veg") {
+    if (mealType == "veg")
+    {
         mainC = make_unique<Paneer>();
         side = make_unique<Salad>();
         drink = make_unique<Juice>();
-    } else if (mealType == "nonveg") {
+    }
+    else if (mealType == "nonveg")
+    {
         mainC = make_unique<Chicken>();
         side = make_unique<Fries>();
         drink = make_unique<Soda>();
-    } else {
+    }
+    else
+    {
         cout << "Unknown meal type\n";
         return;
     }
@@ -72,7 +87,8 @@ void assembleMeal(const string& mealType) {
          << ", Drink: " << drink->name() << "\n";
 }
 
-int main() {
+int main()
+{
     assembleMeal("veg");
     assembleMeal("nonveg");
     return 0;
@@ -85,7 +101,6 @@ Main: Chicken Main Course, Side: Fries Side, Drink: Soda
 */
 // Problem: If you add more families or products, you must edit assembleMeal() everywhere (open to mix-ups).
 
-
 // ===== Abstract Factory-Compliant Example =====
 
 #include <iostream>
@@ -94,67 +109,79 @@ Main: Chicken Main Course, Side: Fries Side, Drink: Soda
 using namespace std;
 
 // Abstract products
-class MainCourse {
+class MainCourse
+{
 public:
     virtual string name() const = 0;
     virtual ~MainCourse() = default;
 };
-class Side {
+class Side
+{
 public:
     virtual string name() const = 0;
     virtual ~Side() = default;
 };
-class Drink {
+class Drink
+{
 public:
     virtual string name() const = 0;
     virtual ~Drink() = default;
 };
 
 // Concrete Veg Products
-class Paneer : public MainCourse {
+class Paneer : public MainCourse
+{
 public:
     string name() const override { return "Paneer Main Course"; }
 };
-class Salad : public Side {
+class Salad : public Side
+{
 public:
     string name() const override { return "Salad Side"; }
 };
-class Juice : public Drink {
+class Juice : public Drink
+{
 public:
     string name() const override { return "Juice"; }
 };
 
 // Concrete Non-Veg Products
-class Chicken : public MainCourse {
+class Chicken : public MainCourse
+{
 public:
     string name() const override { return "Chicken Main Course"; }
 };
-class Fries : public Side {
+class Fries : public Side
+{
 public:
     string name() const override { return "Fries Side"; }
 };
-class Soda : public Drink {
+class Soda : public Drink
+{
 public:
     string name() const override { return "Soda"; }
 };
 
 // Concrete Chineese Products
-class Noodles : public MainCourse {
+class Noodles : public MainCourse
+{
 public:
     string name() const override { return "Chineese Main Course"; }
 };
-class SpringRolls : public Side {
+class SpringRolls : public Side
+{
 public:
     string name() const override { return "Spring roll Side"; }
 };
-class IcedTea : public Drink {
+class IcedTea : public Drink
+{
 public:
     string name() const override { return "Ice Tea Drink"; }
 };
 
-
 // Abstract Factory
-class MealFactory {
+class MealFactory
+{
 public:
     virtual unique_ptr<MainCourse> createMainCourse() const = 0;
     virtual unique_ptr<Side> createSide() const = 0;
@@ -163,47 +190,60 @@ public:
 };
 
 // Concrete Factories
-class VegMealFactory : public MealFactory {
+class VegMealFactory : public MealFactory
+{
 public:
-    unique_ptr<MainCourse> createMainCourse() const override {
+    unique_ptr<MainCourse> createMainCourse() const override
+    {
         return make_unique<Paneer>();
     }
-    unique_ptr<Side> createSide() const override {
+    unique_ptr<Side> createSide() const override
+    {
         return make_unique<Salad>();
     }
-    unique_ptr<Drink> createDrink() const override {
+    unique_ptr<Drink> createDrink() const override
+    {
         return make_unique<Juice>();
     }
 };
 
-class NonVegMealFactory : public MealFactory {
+class NonVegMealFactory : public MealFactory
+{
 public:
-    unique_ptr<MainCourse> createMainCourse() const override {
+    unique_ptr<MainCourse> createMainCourse() const override
+    {
         return make_unique<Chicken>();
     }
-    unique_ptr<Side> createSide() const override {
+    unique_ptr<Side> createSide() const override
+    {
         return make_unique<Fries>();
     }
-    unique_ptr<Drink> createDrink() const override {
+    unique_ptr<Drink> createDrink() const override
+    {
         return make_unique<Soda>();
     }
 };
 
-class ChineeseMealFactory : public MealFactory{
+class ChineeseMealFactory : public MealFactory
+{
 public:
-    unique_ptr<MainCourse> createMainCourse() const override {
+    unique_ptr<MainCourse> createMainCourse() const override
+    {
         return make_unique<Noodles>();
     }
-    unique_ptr<Side> createSide() const override {
+    unique_ptr<Side> createSide() const override
+    {
         return make_unique<SpringRolls>();
     }
-    unique_ptr<Drink> createDrink() const override {
+    unique_ptr<Drink> createDrink() const override
+    {
         return make_unique<IcedTea>();
     }
 };
 
 // Client code
-void assembleMeal(const MealFactory& factory) {
+void assembleMeal(const MealFactory &factory)
+{
     auto mainC = factory.createMainCourse();
     auto side = factory.createSide();
     auto drink = factory.createDrink();
@@ -211,7 +251,8 @@ void assembleMeal(const MealFactory& factory) {
          << ", Drink: " << drink->name() << "\n";
 }
 
-int main() {
+int main()
+{
     VegMealFactory vegFactory;
     NonVegMealFactory nonVegFactory;
     ChineeseMealFactory chineeseFactory;
